@@ -49,6 +49,8 @@ const store = createStore({
         }, 
         searchUsers({commit, state}, payload){
 
+            // filtering the userData based on the user's input
+
             const filtered = state.userData.filter(item => {
                 return item.name.toLowerCase().startsWith(payload.toLowerCase());
             });

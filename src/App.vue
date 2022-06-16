@@ -40,6 +40,9 @@
       }
     },
     mounted(){
+
+      // Fetching user data from API Upon Startup
+
       this.$store.dispatch('fetchUserData')
       .then(result => {
         console.log('result', result);
