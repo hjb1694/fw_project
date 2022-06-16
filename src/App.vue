@@ -1,9 +1,9 @@
 <template>
   <div class="app-component">
-    <div v-if="isLoading && !hasLoadError"> 
+    <div class="loading-text" v-if="isLoading && !hasLoadError"> 
       Loading users...
     </div>
-    <div v-else-if="!isLoading && hasLoadError"> 
+    <div class="error-text" v-else-if="!isLoading && hasLoadError"> 
       Oh no! An error has occurred!
     </div>
     <template v-else>
@@ -87,5 +87,11 @@
     display:block;
     margin:2rem auto;
     padding:3px;
+  }
+
+  .loading-text, 
+  .error-text {
+    font-size:2.5rem;
+    text-align:center;
   }
 </style>
