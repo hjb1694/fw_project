@@ -7,6 +7,13 @@
       Oh no! An error has occurred!
     </div>
     <template v-else>
+      <input 
+      class="search-box" 
+      type="text" 
+      placeholder="Search By Name" 
+      v-model="searchCriteria" 
+      @input="search"
+      />
       <app-table :user-data="filteredUserData" />
     </template>
   </div>
@@ -23,9 +30,15 @@
     data(){
       return {
         isLoading: true, 
-        hasLoadError: false
+        hasLoadError: false, 
+        searchCriteria: ''
       }
     }, 
+    methods: {
+      search(){
+        this.$store.dispatch('searchUsers', this.searchCriteria);
+      }
+    },
     mounted(){
       this.$store.dispatch('fetchUserData')
       .then(result => {
@@ -63,5 +76,13 @@
   a, 
   select {
     cursor:pointer;
+  }
+
+  .search-box{
+    font-size:2rem;
+    width:50%;
+    display:block;
+    margin:2rem auto;
+    padding:3px;
   }
 </style>

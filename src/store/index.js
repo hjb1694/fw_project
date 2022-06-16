@@ -50,7 +50,7 @@ const store = createStore({
         searchUsers({commit, state}, payload){
 
             const filtered = state.userData.filter(item => {
-                return item.name.startsWith(payload);
+                return item.name.toLowerCase().startsWith(payload.toLowerCase());
             });
 
             commit('storeFilteredUserData', filtered);
