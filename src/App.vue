@@ -1,12 +1,25 @@
 <template>
   <div class="app-component">
-    App
+    <div v-if="isLoading && !hasLoadError"> 
+      Loading users...
+    </div>
+    <div v-else-if="!isLoading && hasLoadError"> 
+      Oh no! An error has occurred!
+    </div>
+    <template v-else>
+      <app-table :user-data="filteredUserData" />
+    </template>
   </div>
 </template>
 
 <script>
+  import Table from './components/Table.component.vue';
+
   export default {
     name: 'app',
+    components: {
+      'app-table': Table
+    },
     data(){
       return {
         isLoading: true, 
@@ -27,8 +40,8 @@
       });
     },
     computed: {
-      userData(){
-        return this.$store.getters['userData'];
+      filteredUserData(){
+        return this.$store.getters['filteredUserData'];
       }
     }
   }

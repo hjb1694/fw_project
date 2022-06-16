@@ -4,17 +4,24 @@ const store = createStore({
     strict: true, 
     state(){
         return {
-            userData: []
+            userData: [], 
+            filteredUserData: []
         }
     }, 
     getters: {
         userData(state){
             return state.userData;
+        }, 
+        filteredUserData(state){
+            return state.filteredUserData;
         }
     }, 
     mutations: {
         storeUserData(state, payload){
             state.userData = payload;
+        }, 
+        storeFilteredUserData(state, payload){
+            state.filteredUserData = payload;
         }
     }, 
     actions: {
@@ -30,6 +37,7 @@ const store = createStore({
 
                 console.log(data);
                 commit('storeUserData', data);
+                commit('storeFilteredUserData', data);
 
                 return true;
             
@@ -38,6 +46,16 @@ const store = createStore({
                 throw new Error(e);
             }
             
+        }, 
+        searchUsers({commit, state}, payload){
+
+            const filtered = state.userData.filter(item => {
+                return item.name.startsWith(payload);
+            });
+
+            commit('storeFilteredUserData', filtered);
+
+
         }
     }
 });
